@@ -7,6 +7,7 @@ public class Task(Guid id, Project project, string title, string? description, D
     public string? Description { get; set; } = description;
     public DateTime CreatedAt { get; } = createdAt;
     private TaskState State { get; set; } = TaskState.New;
+    private ICollection<Comment> Comments { get; } = new List<Comment>();
 
     public void ChangeTitle(string newTitle)
     {
@@ -28,6 +29,15 @@ public class Task(Guid id, Project project, string title, string? description, D
         ValidateTransitionAllowed(newState);
         
         State = newState;
+    }
+
+    public void AddComment(Guid commentId, string content, DateTime createdAt)
+    {
+        project.ValidateNotArchived();
+
+        var comment = new Comment(commentId, this, content, createdAt);
+        
+        Comments.Add(comment);
     }
 
     public bool IsTransitionAllowed(TaskState newState)

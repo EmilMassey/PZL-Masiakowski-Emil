@@ -39,3 +39,6 @@ Etap: konfiguracja środowiska i repozytorium.
 ## Znane ograniczenia
 
 - Projekt jest na etapie przygotowania środowiska.
+
+## Diagram encji
+`Project (1) ---> (N) Task (1) ---> (N) Comment`

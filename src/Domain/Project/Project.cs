@@ -22,6 +22,11 @@ public class Project(Guid id, string name, string? description, DateTime created
         Tasks.Add(newTask);
     }
 
+    public Task? FindTask(Guid taskId)
+    {
+        return Tasks.FirstOrDefault(comment => comment.Id == taskId);
+    }
+
     public void Archive(DateTime archivedAt)
     {
         if (State == ProjectState.Archived)
